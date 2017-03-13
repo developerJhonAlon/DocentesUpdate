@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/plantillaPrincipal.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Datos Personales</ui:define>
+
+    <ui:define name="contenido">
+
+        <h:form id="panelInformacion" >
+
+            <p:growl id="growl" life="2000" />
+            <p:commandButton id="botonActualizar" value="Actualizar"
+                                 icon="ui-icon-search" />
+            <p:panel id="panelDatos" header="Datos Personales"  >
+                
+                
+                
+                <p:panelGrid id="gridDatos" columns="6" >
+
+                    <p:outputLabel for="nombre" value="Nombres:"/>
+                    <p:inputText id="nombre" value="#{personaBean.personaDTO.perNombre}" required="true" maxlength="40"/>
+                    <p:message for="nombre"/>
+
+                    <p:outputLabel for="apellido" value="Apellidos:" />
+                    <p:inputText id="apellido" value="#{personaBean.personaDTO.perApellido}" required="true" maxlength="40"/>
+                    <p:message for="apellido"/>
+
+                    <p:outputLabel for="emailInstitucional" value="Correo Institucional:" />
+                    <p:inputText id="emailInstitucional" value="#{personaBean.personaDTO.perEmailInstitucional}" required="true" maxlength="40"/>
+                    <p:message for="emailInstitucional"/>
+
+                    <p:outputLabel for="genero" value="Genero:" />
+                    <p:inputText id="genero" value="#{personaBean.personaDTO.perGenero}" required="true" maxlength="40"/>
+                    <p:message for="genero"/>
+
+                    <p:outputLabel for="ciudadania" value="Ciudadania:" />
+                    <p:inputText id="ciudadania" value="#{personaBean.personaDTO.perCiudadania}" required="true" maxlength="40"/>
+                    <p:message for="ciudadania"/>
+
+                    <p:outputLabel for="fechaNacimiento" value="Fecha Nacimiento" />
+                    <p:calendar id="fechaNacimiento" value="#{personaBean.personaDTO.perFechaNacimiento}" locale="es"  navigator="true" pattern="yyyy-MMM-dd" />
+                    <p:message for="fechaNacimiento"/>
+
+                    <p:outputLabel for="etnia" value="Etnia:" />
+                    <p:inputText id="etnia" value="#{personaBean.personaDTO.perEtnia}" required="true" maxlength="40"/>
+                    <p:message for="etnia"/>        
+
+                    <p:outputLabel for="estadoCivil" value="Estado Civil:" />
+                    <p:inputText id="estadoCivil" value="#{personaBean.personaDTO.perEstCivil}" required="true" maxlength="40"/>
+                    <p:message for="estadoCivil"/>        
+
+                    <p:outputLabel for="emailPersonal" value="Correo Personal:" />
+                    <p:inputText id="emailPersonal" value="#{personaBean.personaDTO.perEmailPersonal}" required="true" maxlength="40"/>
+                    <p:message for="emailPersonal"/>        
+
+                    <p:outputLabel for="campus" value="Campus:" />
+                    <p:inputText id="campus" value="#{personaBean.personaDTO.perCampus}" required="true" maxlength="40"/>
+                    <p:message for="campus"/>        
+
+                    <p:outputLabel for="dedicacion" value="Dedicación:" />
+                    <p:inputText id="dedicacion" value="#{personaBean.personaDTO.perDedicacion}" required="true" maxlength="40"/>
+                    <p:message for="dedicacion"/>        
+
+                    <p:outputLabel for="departamento" value="Departamento:" />
+                    <p:inputText id="departamento" value="#{personaBean.personaDTO.perDepartamento}" required="true" maxlength="40"/>
+                    <p:message for="departamento"/>        
+
+                </p:panelGrid>
+
+                
+            </p:panel>
+
+            <p:panel id="panelDomicilio" header="Dirección Domiciliario">
+                <p:panelGrid id="gridDomicilio" columns="6" >
+
+                    <p:outputLabel for="provincia" value="Provincia:"/>
+                    <p:inputText id="provincia" value="#{personaBean.personaDTO.perProvincia}" required="true" maxlength="40"/>
+                    <p:message for="provincia"/>
+
+                    <p:outputLabel for="ciudad" value="Ciudad" />
+                    <p:inputText id="ciudad" value="#{personaBean.personaDTO.perCiudad}" required="true" maxlength="40"/>
+                    <p:message for="ciudad"/>
+
+                    <p:outputLabel for="parroquia" value="Parroquia:" />
+                    <p:inputText id="parroquia" value="#{personaBean.personaDTO.perParroquia}" required="true" maxlength="40"/>
+                    <p:message for="parroquia"/>
+                    
+                    <p:outputLabel for="direccion" value="Dirección:" />
+                    <p:inputText id="direccion" value="#{personaBean.personaDTO.perDireccion}" required="true" maxlength="40"/>
+                    <p:message for="direccion"/>
+                    
+                </p:panelGrid>
+
+            </p:panel>
+            
+            
+              <p:panel id="panelContacto" header="Contacto Emergencia">
+                <p:panelGrid id="gridContacto" columns="6" >
+
+                    <p:outputLabel for="nombreApellido" value="Nombre y Apellido"/>
+                    <p:inputText id="nombreApellido" value="#{personaBean.contactoDTO.conNombre}" required="true" maxlength="40"/>
+                    <p:message for="nombreApellido"/>
+
+                    <p:outputLabel for="telefono" value="Telefono:" />
+                    <p:inputText id="telefono" value="#{personaBean.contactoDTO.conTelefono}" required="true" maxlength="40"/>
+                    <p:message for="telefono"/>
+
+                    <p:outputLabel for="parentesco" value="Parentesco:" />
+                    <p:inputText id="parentesco" value="#{personaBean.contactoDTO.conParentesco}" required="true" maxlength="40"/>
+                    <p:message for="parentesco"/>
+                    
+                    <p:outputLabel for="direccionContacto" value="Dirección:" />
+                    <p:inputText id="direccionContacto" value="#{personaBean.contactoDTO.conDireccion}" required="true" maxlength="40"/>
+                    <p:message for="direccionContacto"/>
+                    
+                </p:panelGrid>
+
+            </p:panel>
+
+
+        </h:form>
+    </ui:define>
+
+    <ui:define name="modales">
+        <!-- Modal  -->
+
+
+    </ui:define>
+
+</ui:composition>

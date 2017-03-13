@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <h:outputStylesheet library="css" name="estilos.css"/>
+
+            <title>
+                Lista de Docentes ESPE
+
+            </title>
+        </h:head>
+
+        <h:body>
+
+            <center>
+                <div id="content">
+                    <p:layout fullPage="true">
+
+                        <p:layoutUnit position="center">
+
+                            <h:form id="formDocentes">
+
+                                <p:growl id="growl" life="2000" />
+
+                                <p:dataTable id="tablaDocentes" var="doc" selectionMode="single"
+                                             selection="#{docenteBean.docenteSeleccionado}" rowKey="#{doc.perIdPersona}" 
+                                             value="#{docenteBean.listaDocentes}" >
+
+                                    <p:ajax event="rowSelect" listener="#{docenteBean.onRowSelect}" />
+
+                                    <p:ajax event="rowUnselect"
+                                            listener="#{docenteBean.onRowUnselect}" />
+
+
+                                    <f:facet name="header">
+                                        Docentes
+                                    </f:facet>
+
+
+                                    <p:column headerText="Nombres">
+                                        <h:outputText value="#{doc.perNombre}" />
+                                    </p:column>
+
+                                    <p:column headerText="Apellidos">
+                                        <h:outputText value="#{doc.perApellido}" />
+                                    </p:column>
+
+                                    <p:column headerText="Genero">
+                                        <h:outputText value="#{doc.perGenero}" />
+                                    </p:column>
+
+                                    <p:column headerText="Campus">
+                                        <h:outputText value="#{doc.perCampus}">
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Estado Civil">
+                                        <h:outputText value="#{doc.perEstCivil}" />            
+
+                                    </p:column>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton 
+                                                         
+                                                         icon="ui-icon-plusthick" value="Información" 
+                                                         action="menuConfirmar"
+                                                          />
+
+                                    </f:facet>
+
+                                </p:dataTable>
+                            </h:form>
+
+
+                        </p:layoutUnit>
+
+                        <p:layoutUnit position="south" resizable="true">
+                            <p class="piePagina">Copyright &copy; DeveloperJhonAlonJami 2017</p>
+                        </p:layoutUnit>
+
+                    </p:layout>
+
+
+                </div>           
+
+            </center>
+
+
+        </h:body>
+
+    </f:view>
+
+</html>

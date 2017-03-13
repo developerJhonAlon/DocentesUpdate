@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/plantillaParaConfirmar.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Capacitaciones</ui:define>
+
+    <ui:define name="contenido">
+
+        <h:form id="formCapacitacion">
+
+            <p:growl id="growl" life="2000" />
+
+            <p:dataTable id="tablaCapacitacion" var="cap"
+                         value="#{confirmarCapacitacionBean.capacitaciones}">   
+
+                <f:facet name="header">
+                    Capacitaciones
+                </f:facet>
+
+
+                <p:column headerText="Tipo">
+                    <h:outputText value="#{cap.capTipo}" />
+                </p:column>
+
+                <p:column headerText="Institución">
+                    <h:outputText value="#{cap.capInstitucion}" />
+                </p:column>
+
+
+                <p:column headerText="Num. Horas">
+                    <h:outputText value="#{cap.capNumHoras}" />
+                </p:column>
+
+                <p:column headerText="Pais">
+                    <h:outputText value="#{cap.capPais}" />            
+
+                </p:column>
+
+
+                <p:column headerText="Estado">
+                    <p:selectBooleanCheckbox value="#{cap.capConfirmado}" />            
+
+                </p:column>
+
+
+                <p:column headerText="Acción">
+                    <p:commandButton update=":formModal:modalCapacitacion,:formModal:panelModalCapacitacion"  oncomplete="PF('dlg').show()" icon="ui-icon-search" title="Ver">
+                        <f:setPropertyActionListener value="#{cap}" target="#{confirmarCapacitacionBean.capacitacionModal}" />
+                    </p:commandButton>
+
+                </p:column>
+
+
+            </p:dataTable>
+
+
+
+        </h:form>
+    </ui:define>
+
+    <ui:define name="modales">
+
+        <!-- Modal  -->
+        <h:form id="formModal">
+            <p:dialog id="modalCapacitacion" header="Capacitación"
+                      widgetVar="dlg" modal="true" showEffect="fade" hideEffect="fade"
+                      resizable="false" closable="false">
+
+                <p:panel id="panelModalCapacitacion" style="text-align:center;">
+                    <p:panelGrid id="gridModalCapacitacion" columns="2"
+                                 rendered="#{not empty confirmarCapacitacionBean.capacitacionModal}"
+                                 columnClasses="label,value" >
+
+                        <p:outputLabel for="tipo" value="Tipo: " />
+                        <p:inputText id="tipo"
+                                     value="#{confirmarCapacitacionBean.capacitacionModal.capTipo}"
+                                     required="true" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+                        <p:outputLabel for="institucion" value="Institucion: " />
+                        <p:inputText id="institucion"
+                                     value="#{confirmarCapacitacionBean.capacitacionModal.capInstitucion}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+
+                        <p:outputLabel for="nombreEvento" value="Nombre de Evento: " />
+                        <p:inputText id="nombreEvento"
+                                     value="#{confirmarCapacitacionBean.capacitacionModal.capNombre}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+                        <p:outputLabel for="profesional" value="Cap. Profesional: " />
+                        <p:inputText id="profesional"
+                                     value="#{confirmarCapacitacionBean.capacitacionModal.capProfesional}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+
+
+                        <p:outputLabel for="conocimiento" value="Area Conocimiento: " />
+                        <p:inputText id="conocimiento"
+                                     value="#{confirmarCapacitacionBean.capacitacionModal.capArea}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+
+                        <p:outputLabel for="numHoras" value="Num. Horas: " />
+                        <p:inputText id="numHoras"
+                                     value="#{confirmarCapacitacionBean.capacitacionModal.capNumHoras}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+                        <p:outputLabel for="fechaInicio" value="Fecha Inicio: " />
+                        <p:calendar id="fechaInicio" value="#{confirmarCapacitacionBean.capacitacionModal.capFechaInicio}" required="true" maxlength="8" />
+
+                        <p:outputLabel for="fechaFinal" value="Fecha Final: " />
+                        <p:calendar id="fechaFinal" value="#{confirmarCapacitacionBean.capacitacionModal.capFechaFinal}" required="true" maxlength="8" />
+
+
+                        <p:outputLabel for="pais" value="Pais: " />
+                        <p:inputText id="pais"
+                                     value="#{confirmarCapacitacionBean.capacitacionModal.capPais}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>    
+
+                        <p:outputLabel value="PDF: " />
+                        <p:commandButton value="Descargar" ajax="false" icon="ui-icon-document"  >
+                            <p:fileDownload value="#{confirmarCapacitacionBean.descargarPDF()}" />  
+                        </p:commandButton>
+
+
+                    </p:panelGrid>
+
+                    <p:spacer height="20px" />
+                    <p:commandButton id="botonGuardar" value="Confirmar"
+                                     update=":formCapacitacion:tablaCapacitacion,:formCapacitacion:growl,panelModalCapacitacion"
+                                     actionListener="#{confirmarCapacitacionBean.botonAceptar()}"
+                                     styleClass="ui-priority-primary"
+                                     process="@this formModal:panelModalCapacitacion">
+                        <p:confirm header="Confirmación" message="¿Enviar Cambios?"
+                                   icon="ui-icon-alert" />
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button"
+                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button"
+                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+
+                    <p:commandButton id="botonCerrar" value="Cerrar"
+                                     update="panelModalCapacitacion"
+                                     actionListener="#{confirmarCapacitacionBean.botonCerrar()}"
+                                     styleClass="ui-priority-primary" process="@this"
+                                     oncomplete="PF('dlg').hide()">
+                        <p:resetInput target="panelModalCapacitacion" />  
+                    </p:commandButton>
+
+                </p:panel>
+
+
+
+            </p:dialog>
+        </h:form>
+
+       
+    </ui:define>
+
+</ui:composition>

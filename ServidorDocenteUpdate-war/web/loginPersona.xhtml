@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view>
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <h:outputStylesheet library="css" name="estilos.css"/>
+
+            <title>Actualizar Docentes ESPE</title>
+        </h:head>
+
+        <h:body>
+
+            <center>
+
+                <h:form>
+                    <div id="contento">
+
+                        <p:panel id="basic" header="Actualizar Docentes ESPE"  style="margin-bottom:20px">
+                            <p:panelGrid columns="2">
+                               
+                                <p:outputLabel for="clave"  value="Ingrese su ID:"/>
+                                <p:inputText id="clave" value="#{loginBean.identificador}" required="true"/>
+                            </p:panelGrid>
+                            <p:spacer height="10px"/>
+                            <div style="margin: 0 auto;">
+                                <p:commandButton id="botonIngreso" value="Iniciar Sesión" action="#{loginBean.iniciarSesion()}"  />
+                            </div>
+                        </p:panel>
+
+                    </div>           
+
+                </h:form>  
+
+            </center>
+            
+            <div id="pie">
+                <p class="piePagina">Copyright &copy; DeveloperJhonAlonJami 2017</p>
+            </div>
+
+        </h:body>
+
+    </f:view>
+
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <h:outputStylesheet library="css" name="estilos.css"/>
+
+            <title>
+                
+                    Actualizar Docentes ESPE
+                
+            </title>
+        </h:head>
+
+        <h:body>
+
+            <center>
+                <div id="content">
+                    <p:layout fullPage="true">
+                        <!--Creacion de Menu-->
+                        <p:layoutUnit position="north" resizable="true" >
+                            
+                            <h:form id="panelMenu">
+                                <p:menubar >
+                                    <p:menuitem value="Actualizacion" update="@form" ajax="true" action="loginPersona" icon="ui-icon-wrench" />
+                                    <p:menuitem value="Talento Humano" update="@form" ajax="true" action="loginConfirmar" icon="ui-icon-wrench" />
+                                    
+                                </p:menubar>
+                            </h:form>
+
+
+                        </p:layoutUnit>
+
+                        <p:layoutUnit position="center">
+                           
+                        </p:layoutUnit>
+
+                        <p:layoutUnit position="south" resizable="true">
+                            <p class="piePagina">Copyright &copy; DeveloperJhonAlonJami 2017</p>
+                        </p:layoutUnit>
+
+                    </p:layout>
+                    
+
+                </div>           
+
+            </center>
+
+
+        </h:body>
+
+    </f:view>
+
+</html>

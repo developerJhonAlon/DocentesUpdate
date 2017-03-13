@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/plantillaPrincipal.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Publicaciones</ui:define>
+
+    <ui:define name="contenido">
+
+        <h:form id="formPublicacion">
+
+            <p:growl id="growl" life="2000" />
+
+            <p:dataTable id="tablaPublicacion" var="pub" 
+                         value="#{publicacionBean.publicaciones}">   
+
+                <f:facet name="header" >
+                    Publicaciones
+                </f:facet>
+
+
+                <p:column headerText="Titulo" >
+                    <h:outputText value="#{pub.pubTitulo}" />
+                </p:column>
+
+                <p:column headerText="Publicación">
+                    <h:outputText value="#{pub.pubPublicacion}" />
+                </p:column>
+
+
+                <p:column headerText="Participación">
+                    <h:outputText value="#{pub.pubParticipacion}" />
+                </p:column>
+
+                <p:column headerText="Idioma">
+                    <h:outputText value="#{pub.pubIdioma}" />            
+
+                </p:column>
+
+                <p:column headerText="Acción">
+                    <p:commandButton update=":formModal:modalPublicacion,:formModal:panelModalPublicacion"  oncomplete="PF('dlg').show()" icon="ui-icon-pencil" title="Editar">
+                        <f:setPropertyActionListener value="#{pub}" target="#{publicacionBean.publicacionModal}" />
+                    </p:commandButton>
+
+                </p:column>
+
+                <f:facet name="footer">
+                    <p:commandButton process="tablaPublicacion"
+                                     update=":formModal:modalPublicacion,:formModal:panelModalPublicacion"
+                                     icon="ui-icon-plusthick" value="Agregar" ajax="true"
+                                     actionListener="#{publicacionBean.botonAgregar()}"
+                                     oncomplete="PF('dlg').show()" />
+
+                </f:facet>
+
+            </p:dataTable>
+
+
+
+        </h:form>
+    </ui:define>
+
+    <ui:define name="modales">
+
+        <!-- Modal  -->
+        <h:form id="formModal" >
+            <p:dialog id="modalPublicacion" header="Publicación"
+                      widgetVar="dlg" modal="true" showEffect="fade" hideEffect="fade"
+                      resizable="false" closable="false">
+
+                <p:panel id="panelModalPublicacion" style="text-align:center;">
+                    <p:panelGrid id="gridModalPublicacion" columns="2"
+                                 rendered="#{not empty publicacionBean.publicacionModal}"
+                                 columnClasses="label,value" >
+
+                        <p:outputLabel for="titulo" value="Titulo: " styleClass="redtexto"/>
+                        <p:inputText id="titulo"
+                                     value="#{publicacionBean.publicacionModal.pubTitulo}"
+                                     required="true"  style="width:100%;"  maxlength="30" >
+
+                        </p:inputText>
+
+                        <p:outputLabel for="participacion" value="Participación: " />
+                        <p:inputText id="participacion"
+                                     value="#{publicacionBean.publicacionModal.pubParticipacion}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+
+                        <p:outputLabel for="publicacion" value="Publicación: " />
+                        <p:inputText id="publicacion"
+                                     value="#{publicacionBean.publicacionModal.pubPublicacion}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+                        <p:outputLabel for="codigoDOI" value="Codigo DOI: " />
+                        <p:inputText id="codigoDOI"
+                                     value="#{publicacionBean.publicacionModal.pubCodDoi}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+
+
+                        <p:outputLabel for="numRevision" value="Num. Revisión: " />
+                        <p:inputText id="numRevision"
+                                     value="#{publicacionBean.publicacionModal.pubNumRevision}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+
+                        <p:outputLabel for="catalogoIndice" value="Catalogo de Indice: " />
+                        <p:inputText id="catalogoIndice"
+                                     value="#{publicacionBean.publicacionModal.pubCtgIndice}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>
+
+                        <p:outputLabel for="volumen" value="Volumen: " />
+                        <p:inputText id="volumen"
+                                     value="#{publicacionBean.publicacionModal.pubVolumen}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>            
+                        
+                        <p:outputLabel for="revision" value="Revisión: " />
+                        <p:inputText id="revision"
+                                     value="#{publicacionBean.publicacionModal.pubRevision}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>   
+                        
+                        
+                        <p:outputLabel for="cuartil" value="Cuartil: " />
+                        <p:inputText id="cuartil"
+                                     value="#{publicacionBean.publicacionModal.pubCuartil}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>                
+                          
+                          
+                         <p:outputLabel for="idioma" value="Idioma: " />
+                        <p:inputText id="idioma"
+                                     value="#{publicacionBean.publicacionModal.pubIdioma}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>          
+                         
+                         
+                        <p:outputLabel for="numISBN" value="Num. ISBN: " />
+                        <p:inputText id="numISBN"
+                                     value="#{publicacionBean.publicacionModal.pubNumIsbn}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>     
+                        
+                        
+                        <p:outputLabel for="estadoPublicacion" value="Estado Publicación: " />
+                        <p:inputText id="estadoPublicacion"
+                                     value="#{publicacionBean.publicacionModal.pubPublicacion}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>    
+                                               
+                        
+                        <p:outputLabel for="codigoISBN" value="Codigo ISBN: " />
+                        <p:inputText id="codigoISBN"
+                                     value="#{publicacionBean.publicacionModal.pubCodIsbn}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>    
+                          
+                        <p:outputLabel for="paginas" value="Paginas: " />
+                        <p:inputText id="paginas"
+                                     value="#{publicacionBean.publicacionModal.pubNumPagina}"
+                                     required="false" style="width:100%;" maxlength="30">
+
+                        </p:inputText>    
+                          
+                          
+                          
+                        <p:outputLabel value="PDF: "/>
+                        <p:commandButton  value="Agregar" ajax="true" icon="ui-icon-document"
+                                     oncomplete="PF('dlgFile').show()" />
+                
+                    </p:panelGrid>
+
+                    <p:spacer height="20px" />
+                    <p:commandButton id="botonGuardar" value="Aceptar" 
+                                     update=":formPublicacion:tablaPublicacion,:formPublicacion:growl,panelModalPublicacion"
+                                     actionListener="#{publicacionBean.botonAceptar()}"
+                                     styleClass="ui-priority-primary"
+                                     process="@this formModal:panelModalPublicacion">
+                        <p:confirm header="Confirmación" message="¿Enviar Cambios?"
+                                   icon="ui-icon-alert" />
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button"
+                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button"
+                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+
+                    <p:commandButton id="botonCerrar" value="Cerrar"
+                                     update="panelModalPublicacion"
+                                     actionListener="#{publicacionBean.botonCerrar()}"
+                                     styleClass="ui-priority-primary" process="@this"
+                                     oncomplete="PF('dlg').hide()">
+                        <p:resetInput target="panelModalPublicacion" />  
+                    </p:commandButton>
+
+                </p:panel>
+
+
+
+            </p:dialog>
+        </h:form>
+
+<!--        modalFile-->
+       <h:form id="formFile" enctype="multipart/form-data">
+            <p:dialog id="modalPublicacion" header="Publicación"
+                      widgetVar="dlgFile" modal="true" showEffect="fade" hideEffect="fade"
+                      resizable="false" closable="false">
+                            
+                             <p:fileUpload id="pdf"
+                                           value="#{publicacionBean.file}"
+                                      mode="simple" />
+                             <h:commandButton value="Aceptar" actionListener="#{publicacionBean.upload()}">
+                             <f:ajax execute="@all" render="@form"/>
+                             </h:commandButton>
+
+    
+                       
+            </p:dialog>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
